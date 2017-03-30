@@ -59,9 +59,9 @@ public class BinRepParser {
      */
     @SuppressWarnings("unchecked")
     public static Replay parseReplay(final File replayFile, final boolean parseCommandsSection, final boolean parseGameChat, final boolean parseMapDataSection, final boolean parseMapTileData) {
-        BinReplayUnpacker unpacker = null;
+        ReplayUnpacker unpacker = null;
         try {
-            unpacker = new BinReplayUnpacker(replayFile);
+            unpacker = new ReplayUnpacker(replayFile);
 
             // Replay ID section
             if (Integer.reverseBytes(ByteBuffer.wrap(unpacker.unpackSection(4)).getInt()) != 0x53526572)

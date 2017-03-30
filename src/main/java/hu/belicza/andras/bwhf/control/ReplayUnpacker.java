@@ -13,7 +13,7 @@ import java.util.Arrays;
  *
  * @author Andras Belicza
  */
-public class BinReplayUnpacker {
+public class ReplayUnpacker {
 
     /**
      * Size of int.
@@ -71,12 +71,12 @@ public class BinReplayUnpacker {
     private final Esi esi = new Esi();
 
     /**
-     * Creates a new BinReplayUnpacker.
+     * Creates a new ReplayUnpacker.
      *
      * @param replayFile replay file to be unpacked
      * @throws Exception if the specified file is a directory, or is a file but does not exist or if it is not a replay file (based on its size)
      */
-    public BinReplayUnpacker(final File replayFile) throws Exception {
+    public ReplayUnpacker(final File replayFile) throws Exception {
         if (!replayFile.exists() || replayFile.isDirectory() || replayFile.length() < BinRepParser.HEADER_SIZE + 8) // Not enough data for id, header and commands length
             throw new Exception("Not a replay file!");
 
