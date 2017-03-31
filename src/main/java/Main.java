@@ -1,13 +1,18 @@
 import model.Action;
+import model.Player;
 import model.Replay;
 import model.parser.ReplayParser;
 
 public class Main {
     public static void main(String args[]) {
-        Replay replay = ReplayParser.parseReplay("/home/jacob/Downloads/test.rep");
+        Replay replay = ReplayParser.parseReplay("test.rep");
 
-        for (Action action : replay.getPlayers()[0].getActions()) {
-            if (action.getName().equals("Build") || action.getName().equals("Train")) {
+        Player player = replay.getPlayers()[0];
+
+        System.out.println(replay.getMap());
+
+        for (Action action : player.getActions()) {
+            if (action.getType() == Action.Type.BUILD || action.getType() == Action.Type.TRAIN) {
                 System.out.println(action);
             }
         }

@@ -50,6 +50,6 @@ public class Replay {
 
     @Override
     public String toString() {
-        return String.format("Name: %s\nPlayers: %s\nMap: %s\nVersion: %s\n", name, Arrays.toString(players), "todo", version);
+        return String.format("Name: %s, Players: %s, Map: %s, Version: %s", name, Arrays.toString(players), map, version);
     }
 }

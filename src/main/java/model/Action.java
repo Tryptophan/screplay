@@ -3,22 +3,21 @@ package model;
 import java.util.Arrays;
 
 /**
- * Stores the name of the action, what it performs the action on, and the time they were performed
+ * Stores the type of the action, what it performs the action on, and the time they were performed
  */
 public class Action {
-    private String name;
-    // todo: refactor out to object that can hold details on param
+    private Type type;
     private String[] params;
     private int seconds;
 
-    public Action(final String name, final String[] params, final int seconds) {
-        this.name = name;
+    public Action(final Type type, final String[] params, final int seconds) {
+        this.type = type;
         this.params = params;
         this.seconds = seconds;
     }
 
-    public String getName() {
-        return name;
+    public Type getType() {
+        return type;
     }
 
     public String[] getParams() {
@@ -29,8 +28,8 @@ public class Action {
         return seconds;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public void setParams(String[] params) {
@@ -43,6 +42,22 @@ public class Action {
 
     @Override
     public String toString() {
-        return String.format("Name: %s, Params: %s, Executed at: %s", name, Arrays.toString(params), seconds);
+        return String.format("Name: %s, Params: %s, Executed at: %s", type, Arrays.toString(params), seconds);
+    }
+
+    public enum Type {
+        BUILD,
+        TRAIN;
+
+        public static Type of(String string) {
+            switch (string) {
+                case "Build":
+                    return BUILD;
+                case "Train":
+                    return TRAIN;
+                default:
+                    return null;
+            }
+        }
     }
 }

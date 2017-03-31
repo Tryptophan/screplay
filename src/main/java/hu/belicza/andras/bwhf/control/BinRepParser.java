@@ -21,33 +21,6 @@ public class BinRepParser {
     public static final int HEADER_SIZE = 0x279;
 
     /**
-     * For testing purposes only.
-     *
-     * @param arguments
-     */
-    public static void main(final String[] arguments) {
-        final String[] replayNames = new String[]{"/home/jacob/Downloads/test.rep"};
-
-        for (final String replayName : replayNames) {
-            final Replay replay = parseReplay(new File(replayName), true, false, true, false);
-            if (replay != null) {
-                replay.replayHeader.printHeaderInformation(new PrintWriter(System.out));
-                for (PlayerActions player : replay.replayActions.players) {
-                    System.out.println(player.playerName);
-                    for (Action action : player.actions) {
-                        System.out.println(action.toString(player.playerName, true));
-                        System.out.println(action.unitIds);
-                    }
-                }
-            }
-            else {
-                System.out.println("Could not parse " + replayName + "!");
-            }
-            System.out.println();
-        }
-    }
-
-    /**
      * Parses a binary replay file.
      *
      * @param replayFile           replay file to be parsed
@@ -300,7 +273,7 @@ public class BinRepParser {
                     if (unitsCount > 1)
                         parametersBuilder.append(',');
                 }
-                // TODO: determine unit name indices
+                // determine unit name indices (never will be done)
                 action = new Action(frame, parametersBuilder.toString(), blockId);
                 break;
             }

@@ -72,6 +72,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return String.format("Name: %s, Race: %s, Color: %s, Actions: %s", name, race.name, color, Arrays.toString(actions));
+        return String.format("Name: %s, Race: %s, Color: %s", name, race.name, color);
     }
 }

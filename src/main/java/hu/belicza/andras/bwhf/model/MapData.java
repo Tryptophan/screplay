@@ -1,5 +1,7 @@
 package hu.belicza.andras.bwhf.model;
 
+import model.Map;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,4 +37,27 @@ public class MapData {
      */
     public List<int[]> startLocationList = new ArrayList<int[]>();
 
+    public static Map.Location[] getLocationArrayFromList(List<short[]> list) {
+        Map.Location[] locations = new Map.Location[list.size()];
+
+        for (int i = 0; i < locations.length; i++) {
+
+            short[] loc = (short[]) list.toArray()[i];
+            locations[i] = new Map.Location((int) loc[0], (int) loc[1]);
+        }
+
+        return locations;
+    }
+
+    public static Map.Location[] getLocationArrayFromIntList(List<int[]> list) {
+        Map.Location[] locations = new Map.Location[list.size()];
+
+        for (int i = 0; i < locations.length; i++) {
+
+            int[] loc = (int[]) list.toArray()[i];
+            locations[i] = new Map.Location(loc[0], loc[1]);
+        }
+
+        return locations;
+    }
 }
