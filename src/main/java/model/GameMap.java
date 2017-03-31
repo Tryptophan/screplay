@@ -1,6 +1,6 @@
 package model;
 
-public class Map {
+public class GameMap {
     private String name;
     private int width;
     private int height;
@@ -10,13 +10,14 @@ public class Map {
     private Location[] mineralFieldLocations;
     private Location[] startLocations;
 
-    public Map(String name, int width, int height, int tileset, Location[] vespeneGeyserLocations, Location[] mineralFieldLocations, Location[] startLocations) {
+    public GameMap(String name, int width, int height, int tileset, Location[] vespeneGeyserLocations, Location[] mineralFieldLocations, Location[] startLocations) {
         this.name = name;
         this.width = width;
         this.height = height;
         this.tileset = tileset;
         this.vespeneGeyserLocations = vespeneGeyserLocations;
         this.mineralFieldLocations = mineralFieldLocations;
+        this.startLocations = startLocations;
     }
 
     public String getName() {

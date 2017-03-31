@@ -6,13 +6,13 @@ public class Replay {
 
     private String name;
     private Player[] players;
-    private Map map;
+    private GameMap gameMap;
     private String version;
 
-    public Replay(String name, Player[] players, Map map, String version) {
+    public Replay(String name, Player[] players, GameMap gameMap, String version) {
         this.name = name;
         this.players = players;
-        this.map = map;
+        this.gameMap = gameMap;
         this.version = version;
     }
 
@@ -32,12 +32,12 @@ public class Replay {
         this.players = players;
     }
 
-    public Map getMap() {
-        return map;
+    public GameMap getGameMap() {
+        return gameMap;
     }
 
-    public void setMap(Map map) {
-        this.map = map;
+    public void setGameMap(GameMap gameMap) {
+        this.gameMap = gameMap;
     }
 
     public String getVersion() {
@@ -50,6 +50,6 @@ public class Replay {
 
     @Override
     public String toString() {
-        return String.format("Name: %s, Players: %s, Map: %s, Version: %s", name, Arrays.toString(players), map, version);
+        return String.format("Name: %s, Players: %s, GameMap: %s, Version: %s", name, Arrays.toString(players), gameMap, version);
     }
 }

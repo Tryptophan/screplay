@@ -3,7 +3,6 @@ package hu.belicza.andras.bwhf.control;
 import hu.belicza.andras.bwhf.model.*;
 
 import java.io.File;
-import java.io.PrintWriter;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.*;
@@ -137,10 +136,10 @@ public class BinRepParser {
 
             MapData mapData = parseMapTileData ? new MapData() : null;
             if (parseMapDataSection) {
-                // Map data length section
+                // GameMap data length section
                 final int mapDataLength = Integer.reverseBytes(ByteBuffer.wrap(unpacker.unpackSection(4)).getInt());
 
-                // Map data section
+                // GameMap data section
                 final ByteBuffer mapDataBuffer = ByteBuffer.wrap(unpacker.unpackSection(mapDataLength));
                 mapDataBuffer.order(ByteOrder.LITTLE_ENDIAN);
 
@@ -314,7 +313,7 @@ public class BinRepParser {
             case (byte) 0x14: { // Move
                 final short posX = commandsBuffer.getShort();
                 final short posY = commandsBuffer.getShort();
-				/*final short unitId = */
+                /*final short unitId = */
                 commandsBuffer.getShort(); // Move to (posX;posY) if this is 0xffff, or move to this unit if it's a valid unit id (if it's not 0xffff)
                 skipBytes = 3;
                 action = new Action(frame, posX + "," + posY, Action.ACTION_NAME_INDEX_MOVE);
@@ -499,7 +498,7 @@ public class BinRepParser {
          */
         public final StringBuilder gameChatBuilder;
         /**
-         * Map from the player IDs to their name.
+         * GameMap from the player IDs to their name.
          */
         public final Map<Integer, String> playerIndexNameMap;
         /**

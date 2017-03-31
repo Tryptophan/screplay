@@ -77,7 +77,7 @@ public class Action implements Comparable<Action> {
             ACTION_NAME_INDEX_VISION
     };
     /**
-     * Map of action IDs and their names.
+     * GameMap of action IDs and their names.
      */
     public static final Map<Byte, String> ACTION_ID_NAME_MAP = new HashMap<Byte, String>();
     /**
@@ -125,15 +125,15 @@ public class Action implements Comparable<Action> {
     public static final short BUILDING_NAME_INDEX_FIRST_ZERG_BUILDING = (short) 0x83;
     public static final short BUILDING_NAME_INDEX_LAST_ZERG_BUILDING = (short) 0x95;
     /**
-     * Map of unit IDs and their names.
+     * GameMap of unit IDs and their names.
      */
     public static final Map<Short, String> UNIT_ID_NAME_MAP = new HashMap<Short, String>();
     /**
-     * Map of building IDs and their sizes in matrices.
+     * GameMap of building IDs and their sizes in matrices.
      */
     public static final Map<Short, Size> BUILDING_ID_SIZE_MAP = new HashMap<Short, Size>();
     /**
-     * Map of building IDs and their sizes in matrices.
+     * GameMap of building IDs and their sizes in matrices.
      */
     public static final Map<Byte, String> GAME_SPEED_MAP = new HashMap<Byte, String>();
     public static final String HOTKEY_ACTION_PARAM_NAME_SELECT = "Select";
@@ -409,7 +409,7 @@ public class Action implements Comparable<Action> {
         UNIT_ID_NAME_MAP.put((short) 0x62, "Raszagal (Corsair)");
         UNIT_ID_NAME_MAP.put((short) 0x63, "Samir Duran (Ghost)");
         UNIT_ID_NAME_MAP.put((short) 0x64, "Alexei Stukov (Ghost)");
-        UNIT_ID_NAME_MAP.put((short) 0x65, "Map Revealer");
+        UNIT_ID_NAME_MAP.put((short) 0x65, "GameMap Revealer");
         UNIT_ID_NAME_MAP.put((short) 0x66, "Gerard DuGalle (BattleCruiser)");
         UNIT_ID_NAME_MAP.put((short) 0x67, "Lurker");
         UNIT_ID_NAME_MAP.put((short) 0x68, "Infested Duran (Infested Terran)");
@@ -756,7 +756,7 @@ public class Action implements Comparable<Action> {
                     actionName = "0x" + Integer.toHexString(actionNameIndex & 0xff);
             }
 
-           this.name = actionName;
+            this.name = actionName;
 
             final StringBuilder actionStringBuilder = new StringBuilder();
             if (timeInSeconds)
@@ -824,6 +824,7 @@ public class Action implements Comparable<Action> {
          * Height of the building.
          */
         public final int height;
+
         /**
          * Creates a new Size.<br>
          * Private because no need to create different size than the supplied constant ones.

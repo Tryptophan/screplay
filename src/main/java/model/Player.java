@@ -1,42 +1,22 @@
 package model;
 
 import java.awt.*;
-import java.util.Arrays;
 
 public class Player {
-
-    public enum Race {
-        TERRAN("Terran"),
-        ZERG("Zerg"),
-        PROTOSS("Protoss");
-
-        private final String name;
-        Race(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public static Race of(String string) {
-            switch (string) {
-                case "Terran":
-                    return TERRAN;
-                case "Zerg":
-                    return ZERG;
-                case "Protoss":
-                    return PROTOSS;
-                default:
-                    return null;
-            }
-        }
-    }
 
     private String name;
     private Race race;
     private Action[] actions;
     private Color color;
+    private int apm;
+
+    public Player(String name, Race race, Action[] actions, Color color, int apm) {
+        this.name = name;
+        this.race = race;
+        this.actions = actions;
+        this.color = color;
+        this.apm = apm;
+    }
 
     public String getName() {
         return name;
@@ -70,8 +50,45 @@ public class Player {
         this.color = color;
     }
 
+    public int getApm() {
+        return apm;
+    }
+
+    public void setApm(int apm) {
+        this.apm = apm;
+    }
+
     @Override
     public String toString() {
-        return String.format("Name: %s, Race: %s, Color: %s", name, race.name, color);
+        return String.format("Name: %s, Race: %s, Color: %s, APM: %s", name, race.name, color, apm);
+    }
+
+    public enum Race {
+        TERRAN("Terran"),
+        ZERG("Zerg"),
+        PROTOSS("Protoss");
+
+        private final String name;
+
+        Race(String name) {
+            this.name = name;
+        }
+
+        public static Race of(String string) {
+            switch (string) {
+                case "Terran":
+                    return TERRAN;
+                case "Zerg":
+                    return ZERG;
+                case "Protoss":
+                    return PROTOSS;
+                default:
+                    return null;
+            }
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 }

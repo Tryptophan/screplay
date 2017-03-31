@@ -20,20 +20,20 @@ public class Action {
         return type;
     }
 
-    public String[] getParams() {
-        return params;
-    }
-
-    public int getSeconds() {
-        return seconds;
-    }
-
     public void setType(Type type) {
         this.type = type;
     }
 
+    public String[] getParams() {
+        return params;
+    }
+
     public void setParams(String[] params) {
         this.params = params;
+    }
+
+    public int getSeconds() {
+        return seconds;
     }
 
     public void setSeconds(int seconds) {

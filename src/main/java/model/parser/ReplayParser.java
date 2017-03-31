@@ -5,16 +5,14 @@ import hu.belicza.andras.bwhf.model.MapData;
 import hu.belicza.andras.bwhf.model.PlayerActions;
 import hu.belicza.andras.bwhf.model.ReplayHeader;
 import model.Action;
-import model.Map;
+import model.GameMap;
 import model.Player;
 import model.Replay;
 
 import java.awt.*;
 import java.io.File;
-import java.util.ArrayList;
 
 import static hu.belicza.andras.bwhf.model.ReplayHeader.convertFramesToSeconds;
-import static sun.audio.AudioPlayer.player;
 
 public class ReplayParser {
 
@@ -70,10 +68,10 @@ public class ReplayParser {
         PlayerActions[] pas = replay.replayActions.players;
         for (int i = 0; i < pas.length; i++) {
             PlayerActions pa = pas[i];
-            Player player = new Player();
-            player.setName(pa.playerName);
-            player.setRace(Player.Race.of(ReplayHeader.RACE_NAMES[replay.replayHeader.playerRaces[i]]));
-            player.setColor(getColorFromString(ReplayHeader.IN_GAME_COLOR_NAMES[replay.replayHeader.playerColors[i]]));
+            String playerName = pa.playerName;
+            int apm = replay.replayHeader.getPlayerApm(i);
+            Player.Race playerRace = Player.Race.of(ReplayHeader.RACE_NAMES[replay.replayHeader.playerRaces[i]]);
+            Color playerColor = getColorFromString(ReplayHeader.IN_GAME_COLOR_NAMES[replay.replayHeader.playerColors[i]]);
             hu.belicza.andras.bwhf.model.Action[] playerActions = pa.actions;
             Action[] actions = new Action[playerActions.length];
             // Get actions for player
@@ -82,24 +80,27 @@ public class ReplayParser {
                 hu.belicza.andras.bwhf.model.Action a = playerActions[j];
                 // Good god, this uses magic to get the name, if this is not called, name is not set
                 //noinspection ResultOfMethodCallIgnored
-                a.toString(player.getName(), true);
+                a.toString(pa.playerName, true);
 
                 // Get time in seconds
                 int seconds = convertFramesToSeconds(a.iteration);
+                System.out.println(a.name);
                 actions[j] = new Action(Action.Type.of(a.name), a.parameters.split(","), seconds);
             }
 
-            player.setActions(actions);
-            players[i] = player;
+            players[i] = new Player(playerName, playerRace, actions, playerColor, apm);
         }
 
-        // Get locations of objects on the map
-        Map.Location[] minerals = MapData.getLocationArrayFromList(replay.mapData.mineralFieldList);
-        Map.Location[] geysers = MapData.getLocationArrayFromList(replay.mapData.geyserList);
-        Map.Location[] starts = MapData.getLocationArrayFromIntList(replay.mapData.startLocationList);
+        int width = replay.mapData.tiles[0];
+        int height = replay.mapData.tiles[1];
 
-        Map map = new Map(replay.replayHeader.mapName, replay.mapData.tiles[0], replay.mapData.tiles[1], replay.mapData.tileSet, minerals, geysers, starts);
+        // Get locations of objects on the gameMap
+        GameMap.Location[] minerals = MapData.getLocationArrayFromList(width / 8, height / 8, replay.mapData.mineralFieldList);
+        GameMap.Location[] geysers = MapData.getLocationArrayFromList(width / 8, height / 8, replay.mapData.geyserList);
+        GameMap.Location[] starts = MapData.getLocationArrayFromIntList(width / 8, height / 8, replay.mapData.startLocationList);
 
-        return new Replay(name, players, map, version);
+        GameMap gameMap = new GameMap(replay.replayHeader.mapName, width, height, replay.mapData.tileSet, geysers, minerals, starts);
+
+        return new Replay(name, players, gameMap, version);
     }
 }

@@ -355,9 +355,9 @@ public class ReplayHeader {
         output.println("Saved on: " + saveTime);
         output.println("Version: " + guessVersionFromDate());
         output.println("Game name: " + gameName);
-        output.println("Map size: " + getMapSize());
+        output.println("GameMap size: " + getMapSize());
         output.println("Creator name: " + creatorName);
-        output.println("Map name: " + mapName);
+        output.println("GameMap name: " + mapName);
         output.println("Players: ");
 
         // We want to sort players by the number of their actions (which is basically sorting by APM)

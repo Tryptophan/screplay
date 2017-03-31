@@ -1,6 +1,6 @@
 package hu.belicza.andras.bwhf.model;
 
-import model.Map;
+import model.GameMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class MapData {
     public short tileSet = -1;
 
     /**
-     * Map tile data: width x height elements.
+     * GameMap tile data: width x height elements.
      */
     public short[] tiles;
 
@@ -37,27 +37,31 @@ public class MapData {
      */
     public List<int[]> startLocationList = new ArrayList<int[]>();
 
-    public static Map.Location[] getLocationArrayFromList(List<short[]> list) {
-        Map.Location[] locations = new Map.Location[list.size()];
+    public static GameMap.Location[] getLocationArrayFromList(int width, int height, List<short[]> list) {
+        GameMap.Location[] locations = new GameMap.Location[list.size()];
 
         for (int i = 0; i < locations.length; i++) {
 
             short[] loc = (short[]) list.toArray()[i];
-            locations[i] = new Map.Location((int) loc[0], (int) loc[1]);
+            locations[i] = new GameMap.Location(scaledPosition(loc[0], width), scaledPosition(loc[1], height));
         }
 
         return locations;
     }
 
-    public static Map.Location[] getLocationArrayFromIntList(List<int[]> list) {
-        Map.Location[] locations = new Map.Location[list.size()];
+    public static GameMap.Location[] getLocationArrayFromIntList(int width, int height, List<int[]> list) {
+        GameMap.Location[] locations = new GameMap.Location[list.size()];
 
         for (int i = 0; i < locations.length; i++) {
 
             int[] loc = (int[]) list.toArray()[i];
-            locations[i] = new Map.Location(loc[0], loc[1]);
+            locations[i] = new GameMap.Location(scaledPosition(loc[0], width), scaledPosition(loc[1], height));
         }
 
         return locations;
+    }
+
+    private static int scaledPosition(int pos, int max) {
+        return pos / max;
     }
 }
